@@ -1,0 +1,8 @@
+*.swp
+*.iml
+.idea/
+target/
+jars/
+.classpath
+.settings
+.project

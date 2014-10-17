@@ -1,0 +1,179 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>io.nodyn</groupId>
+  <artifactId>aether</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>Java node-sass</name>
+  <url>http://nodyn.io/</url>
+
+  <description>
+  </description>
+
+  <parent>
+    <groupId>org.sonatype.oss</groupId>
+    <artifactId>oss-parent</artifactId>
+    <version>7</version>
+  </parent>
+
+  <scm>
+    <connection>scm:git:git://github.com/nodyn/node-sass.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/nodyn/node-sass.git</developerConnection>
+    <url>http://github.com/nodyn.io</url>
+  </scm>
+
+  <developers>
+    <developer>
+      <name>Lance Ball</name>
+      <email>lball@redhat.com</email>
+      <organization>Project Odd</organization>
+      <organizationUrl>http://projectodd.org</organizationUrl>
+    </developer>
+    <developer>
+      <name>Bob McWhirter</name>
+      <email>bobmcw@redhat.com</email>
+      <organization>Project Odd</organization>
+      <organizationUrl>http://projectodd.org</organizationUrl>
+    </developer>
+  </developers>
+
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <properties>
+    <!-- encodings -->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+    <!-- plugin versions -->
+    <maven.compiler.plugin.version>3.0</maven.compiler.plugin.version>
+    <maven.failsafe.plugin.version>2.14</maven.failsafe.plugin.version>
+    <maven.surefire.plugin.version>2.14</maven.surefire.plugin.version>
+    <maven.resources.plugin.version>2.6</maven.resources.plugin.version>
+    <maven.dependency.plugin.version>2.7</maven.dependency.plugin.version>
+    <maven.assembly.plugin.version>2.4</maven.assembly.plugin.version>
+    <maven.enforcer.plugin.version>1.1</maven.enforcer.plugin.version>
+    <maven.clean.plugin.version>2.5</maven.clean.plugin.version>
+    <maven.source.plugin.version>2.2.1</maven.source.plugin.version>
+
+    <!-- dependency versions -->
+    <version.junit>4.7</version.junit>
+    <version.aether>1.0.0.v20140518</version.aether>
+
+    <test.pattern>**/*Spec.js</test.pattern>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.eclipse.aether</groupId>
+      <artifactId>aether-api</artifactId>
+      <version>${version.aether}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.aether</groupId>
+      <artifactId>aether-spi</artifactId>
+      <version>${version.aether}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.aether</groupId>
+      <artifactId>aether-util</artifactId>
+      <version>${version.aether}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.aether</groupId>
+      <artifactId>aether-impl</artifactId>
+      <version>${version.aether}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.aether</groupId>
+      <artifactId>aether-connector-basic</artifactId>
+      <version>${version.aether}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.aether</groupId>
+      <artifactId>aether-transport-file</artifactId>
+      <version>${version.aether}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.aether</groupId>
+      <artifactId>aether-transport-http</artifactId>
+      <version>${version.aether}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-aether-provider</artifactId>
+      <version>3.1.1</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <finalName>node-sass</finalName>
+    <resources>
+      <resource>
+        <directory>lib/</directory>
+        <targetPath>lib/</targetPath>
+      </resource>
+    </resources>
+    <extensions>
+      <extension>
+        <groupId>org.apache.maven.wagon</groupId>
+        <artifactId>wagon-webdav-jackrabbit</artifactId>
+        <version>2.4</version>
+      </extension>
+    </extensions>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${maven.compiler.plugin.version}</version>
+        <configuration>
+          <source>1.7</source>
+          <target>1.7</target>
+          <encoding>${project.build.sourceEncoding}</encoding>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+            <configuration>
+              <stripVersion>true</stripVersion>
+              <outputDirectory>jars/</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-clean-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>clean</goal>
+            </goals>
+            <phase>clean</phase>
+            <configuration>
+              <filesets>
+                <fileset>
+                  <directory>jars/</directory>
+                </fileset>
+              </filesets>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
