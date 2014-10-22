@@ -6,5 +6,5 @@ for ( i = 0 ; i < jars.length ; ++i ) {
   require( './jars/' + jars[i] );
 }
 
-module.exports = require( './aether.js')
+//module.exports = require( './aether.js')
 
