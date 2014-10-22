@@ -3,10 +3,10 @@
 
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.nodyn</groupId>
-  <artifactId>aether</artifactId>
+  <artifactId>mavenjs</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
-  <name>Java node-sass</name>
+  <name>Maven for Javascript</name>
   <url>http://nodyn.io/</url>
 
   <description>
@@ -167,6 +167,9 @@
               <filesets>
                 <fileset>
                   <directory>jars/</directory>
+                </fileset>
+                <fileset>
+                  <directory>local-maven-repo/</directory>
                 </fileset>
               </filesets>
             </configuration>
