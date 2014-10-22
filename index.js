@@ -6,5 +6,6 @@ for ( i = 0 ; i < jars.length ; ++i ) {
   require( './jars/' + jars[i] );
 }
 
-//module.exports = require( './aether.js')
+module.exports.LocalRepository  = require('./lib/local-repository' );
+module.exports.RemoteRepository = require('./lib/remote-repository' );
 

@@ -1,6 +1,6 @@
 var assert = require('assert');
-require( './../index' );
-var LocalRepository = require( './../lib/local-repository' );
+var maven  = require( './../index' );
+var LocalRepository = maven.LocalRepository;
 
 describe( 'local repositories', function() {
 
