@@ -3,6 +3,8 @@
 .idea/
 target/
 jars/
+local-maven-repo/
+node_modules/
 .classpath
 .settings
 .project
